@@ -33,6 +33,11 @@ class StockRepository{
         return $this->model::latest()->paginate(7)->withQueryString();
     }
 
+    public function readAll()
+    {
+        return $this->model::latest()->get();
+    }
+
     public function readById($id)
     {
         return $this->model::find($id);

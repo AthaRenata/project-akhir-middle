@@ -1,6 +1,6 @@
-        <div class="navbar navbar-expand-lg col-lg-auto bg-theme1 sticky-top">
+        <div class="navbar navbar-expand-md col-md-auto bg-theme1 sticky-top">
             <div class="h-100 bg-theme1 w-100 px-2">
-            <div class="d-flex flex-sm-column flex-sm-grow-1 flex-row bg-theme1 align-items-center justify-content-between w-100 sticky-top">
+            <div class="d-flex flex-md-column flex-md-grow-1 flex-row bg-theme1 align-items-center justify-content-between w-100 sticky-top">
                 <a href="/admin/home" class="d-block p-3 text-decoration-none text-theme3" title="" data-bs-toggle="tooltip" data-bs-placement="right">
                     <p class="fs-1 font-allison">Reisto</p>
                 </a>
@@ -42,8 +42,8 @@
                                 <i class="bi-file-earmark-fill fs-1"></i>
                             </a>
                             <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser3">
-                                <li><a class="dropdown-item" href="#">Laporan Transaksi</a></li>
-                                <li><a class="dropdown-item" href="#">Laporan Produk Paling Sering Dibeli</a></li>
+                                <li><a class="dropdown-item" href="/admin/reports/transactions">Laporan Transaksi</a></li>
+                                <li><a class="dropdown-item" href="/admin/reports/grosses">Laporan Produk Paling Sering Dibeli</a></li>
                             </ul>
                         </div>
                     </li>

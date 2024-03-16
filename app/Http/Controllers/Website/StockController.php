@@ -25,8 +25,7 @@ class StockController extends Controller
     public function index()
     {
         return view('web.admin.stocks.index',[
-            'stocks'=>$this->serviceStock->getAll(),
-            'dataNow'=>$this->serviceStock->getByDate(now())
+            'stocks'=>$this->serviceStock->getAll()
         ]);
     }
 

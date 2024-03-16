@@ -47,20 +47,20 @@
     <div class="container-fluid">
       <div class="row">
 
-  @if (auth()->check() && auth()->user()->role===1)
-    <x-web.admin.header/>
-    {{$slot}}
-    <x-web.admin.footer/>
-
-  @elseif (auth()->check() && auth()->user()->role===2)
-    <x-web.staff.header/>
-    {{$slot}}
-    <x-web.staff.footer/>
+  @can('admin')
+  <x-web.admin.header/>
+  {{$slot}}
+  <x-web.admin.footer/>
+      
+  @elsecan('staff')
+  <x-web.staff.header/>
+  {{$slot}}
+  <x-web.staff.footer/>
 
   @else
-    {{$slot}}
+  {{$slot}}
 
-  @endif
+  @endcan
 
       </div>
     </div>

@@ -57,13 +57,13 @@
                 <h5 class="text-theme4 d-inline">Rp{{number_format($product->price,2,',','.')}}</h5> /
                 <p class="text-body-secondary d-inline">{{$product->stock}} pcs</p>
               </div>
-              <div class="mt-2">
+              <div class="mt-2 d-flex justify-content-center gap-2">
                 <form action="/admin/products/{{$product->name}}" method="POST" class="d-inline">
                   @method('delete')
                   @csrf
-                <button class="btn btn-danger" onclick="return confirm('Yakin akan hapus data ini?')"><i class="bi-trash"></i></button>
+                <button class="btn btn-danger" onclick="return confirm('Yakin akan hapus data ini?')"  data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Hapus Data"><i class="bi-trash"></i></button>
                 </form>
-                <a href="/admin/products/{{$product->name}}/edit" class="btn btn-warning"><i class="bi-pencil"></i></a>
+                <a href="/admin/products/{{$product->name}}/edit" class="btn btn-warning"  data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Ubah Data"><i class="bi-pencil"></i></a>
               </div>
             </div>
           </div>

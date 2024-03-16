@@ -24,7 +24,7 @@
                       @csrf
                         <div class="col-12">
                           <label for="inputEmail" class="form-label">Email</label>
-                          <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="inputEmail" placeholder="name@example.com" autofocus required value="{{ old('email') }}">
+                          <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="inputEmail" autofocus required value="{{ old('email') }}">
                           @error('email')
                             <div class="invalid-feedback">
                               {{ $message }}

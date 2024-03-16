@@ -6,12 +6,13 @@ use App\Models\Order;
 use App\Helpers\Colors;
 use App\Models\Category;
 use Illuminate\Http\Request;
-use Illuminate\Support\Collection;
 use App\Services\OrderService;
 use App\Services\ProductService;
 use App\Services\CategoryService;
 use App\Services\CustomerService;
+use Illuminate\Support\Collection;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Gate;
 
 class OrderController extends Controller
 {
@@ -33,9 +34,17 @@ class OrderController extends Controller
      */
     public function index()
     {
+        if (Gate::allows('admin')) {
         return view('web.admin.orders.index',[
             'orders' =>  $this->serviceOrder->getAll()
         ]);
+        }else if(Gate::allows('staff')){
+        return view('web.staff.orders.index',[
+            'orders' =>  $this->serviceOrder->getAll()
+        ]);
+        }else{
+            abort(403);
+        }
     }
 
     /**
@@ -45,6 +54,7 @@ class OrderController extends Controller
     {   
         $orders = $request->session()->get('orders', []);
 
+        if (Gate::allows('admin')) {
         return view('web.admin.orders.create',[
             'customers' => $this->serviceCustomer->getAll(),
             'categories' => $this->serviceCategory->getAll(),
@@ -52,6 +62,17 @@ class OrderController extends Controller
             'products'=> $this->serviceProduct->getAll(request(['category','search'])),
             'orders'=> $this->serviceProduct->getAll($orders,'order')
         ]);
+        }else if(Gate::allows('staff')){
+            return view('web.staff.orders.create',[
+                'customers' => $this->serviceCustomer->getAll(),
+                'categories' => $this->serviceCategory->getAll(),
+                'colorArray'=> Colors::getColors(),
+                'products'=> $this->serviceProduct->getAll(request(['category','search'])),
+                'orders'=> $this->serviceProduct->getAll($orders,'order')
+            ]);
+        }else{
+            abort(403);
+        }
     }
 
     public function sessionControl(Request $request)
@@ -89,7 +110,13 @@ class OrderController extends Controller
     {
         $this->serviceOrder->saveData($request);
 
+        if (Gate::allows('admin')) {
         return redirect('/admin/orders')->with('success',"Order baru tanggal <b>".now()."</b> berhasil ditambahkan");
+        }else if(Gate::allows('staff')){
+            return redirect('/orders')->with('success',"Order baru tanggal <b>".now()."</b> berhasil ditambahkan");
+        }else{
+            abort(403);
+        }
     }
 
     /**
@@ -97,9 +124,17 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
+        if(Gate::allows('admin')){
         return view('web.admin.orders.show',[
                 'order' =>  $this->serviceOrder->getById($order->id)
         ]);
+    }else if(Gate::allows('staff')){
+        return view('web.staff.orders.show',[
+            'order' =>  $this->serviceOrder->getById($order->id)
+    ]);
+    }else{
+        abort(403);
+    }
     }
 
     /**
@@ -125,7 +160,12 @@ class OrderController extends Controller
     {
         $this->serviceOrder->deleteById($order->id);
 
+        if(Gate::allows('admin')){
         return redirect('/admin/orders')->with('success',"Order pada <b>$order->created_at</b> berhasil dibatalkan");
-
+        }else if(Gate::allows('staff')){
+            return redirect('/orders')->with('success',"Order pada <b>$order->created_at</b> berhasil dibatalkan");
+        }else{
+            abort(403);
+        }
     }
 }

@@ -30,14 +30,14 @@
             @foreach ($stocks as $stock)
             <thead class="table-success">
                 <tr>
-                    <td>Tanggal : {{$stock->date}}</td>
+                    <td>Tanggal : <strong>{{$stock->date}}</strong></td>
                     <td>Total : <strong> Rp{{number_format($stock->cost,'2',',','.')}} / {{$stock->products->sum('pivot.quantity')}} Pcs </strong></td>
                     <td>
-                    <a href="/admin/stocks/{{$stock->date}}/edit" class="btn btn-warning"><i class="bi-pencil"></i></a>
+                    <a href="/admin/stocks/{{$stock->date}}/edit" class="btn btn-warning"  data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Ubah Data"><i class="bi-pencil"></i></a>
                     <form action="/admin/stocks/{{$stock->date}}" method="POST" class="d-inline">
                         @method('delete')
                         @csrf
-                        <button class="btn btn-danger" onclick="return confirm('Yakin akan hapus data ini?')"><i class="bi-trash"></i></button>
+                        <button class="btn btn-danger" onclick="return confirm('Yakin akan hapus data ini?')"  data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Hapus Data"><i class="bi-trash"></i></button>
                     </form>
                     </td>
                     </tr>

@@ -1,6 +1,7 @@
 <?php 
 namespace App\Services;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
 use App\Repositories\CategoryRepository;
 
@@ -16,7 +17,7 @@ class CategoryService{
     {
         $validatedData = $data->validate([
             'icon'=>'required',
-            'name'=>'required'
+            'name'=>'required|unique:categories,name'
         ]);
 
         $upload = Storage::put('image',$validatedData['icon']);
@@ -28,7 +29,7 @@ class CategoryService{
     public function updateData($data, $id)
     {
         $validatedData = $data->validate([
-            'name'=>'required'
+            'name'=>['required',Rule::unique('categories')->ignore($id)],
         ]);
 
         if (!empty($data['icon'])) {

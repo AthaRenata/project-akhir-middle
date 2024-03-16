@@ -4,17 +4,20 @@ namespace App\Services;
 use App\Models\Product;
 use App\Repositories\OrderRepository;
 use App\Repositories\ProductRepository;
+use App\Repositories\CustomerRepository;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class OrderService{
     protected $repositoryOrder;
     protected $repositoryProduct;
+    protected $repositoryCustomer;
 
-    public function __construct(OrderRepository $repositoryOrder, ProductRepository $repositoryProduct)
+    public function __construct(OrderRepository $repositoryOrder, ProductRepository $repositoryProduct, CustomerRepository $repositoryCustomer)
     {
         $this->repositoryOrder = $repositoryOrder;
         $this->repositoryProduct = $repositoryProduct;
+        $this->repositoryCustomer = $repositoryCustomer;
     }
 
     public function saveData($data)
@@ -36,17 +39,10 @@ class OrderService{
             'products.*.product_name' => 'required',
             'products.*.category_name' => 'required',
         ]);
-        
 
-        foreach ($data['products'] as $productData) {
-            $productId = $productData['id'];
-            $quantity = $productData['quantity'];
-            $product = $this->repositoryProduct->readById($productId);
-            if ($quantity > $product->stock) {
-                return false;
-            }
-        }
-        $order = $this->repositoryOrder->save($validatedData);
+        $customer = $this->repositoryCustomer->readById($validatedData['customer_id']);
+
+        $order = $this->repositoryOrder->save($validatedData, $customer);
 
         foreach ($data['products'] as $productData) {
             $productId = $productData['id'];

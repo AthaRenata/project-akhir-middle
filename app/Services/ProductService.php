@@ -2,6 +2,7 @@
 namespace App\Services;
 
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 use App\Repositories\ProductRepository;
 use Illuminate\Support\Facades\Storage;
 
@@ -18,7 +19,7 @@ class ProductService{
         $validatedData = $data->validate([
             'category_id'=>'nullable',
             'photo'=>'required',
-            'name'=>'required',
+            'name'=>'required|unique:products,name',
             'description'=>'required',
             'price'=>'required'
         ]);
@@ -33,7 +34,7 @@ class ProductService{
     {
         $validatedData = $data->validate([
             'category_id'=>'nullable',
-            'name'=>'required',
+            'name'=>['required',Rule::unique('products')->ignore($id)],
             'description'=>'required',
             'price'=>'required'
         ]);

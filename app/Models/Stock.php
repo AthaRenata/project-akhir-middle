@@ -10,6 +10,7 @@ class Stock extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+    protected $with = ['products'];
 
     public function products(){
         return $this->belongsToMany(Product::class,'stock_details','stock','product')

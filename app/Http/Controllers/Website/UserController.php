@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Services\UserService;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller
 {
@@ -20,9 +21,17 @@ class UserController extends Controller
      */
     public function index()
     {
+        if(Gate::allows('admin')){
         return view('web.admin.users.index',[
             'users' =>$this->service->getAll()
         ]);
+    }else if(Gate::allows('staff')){
+        return view('web.staff.users.index',[
+            'users' =>$this->service->getAll()
+        ]);
+            }else{
+                abort(403);
+            }
     }
 
     /**
@@ -30,7 +39,13 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('web.admin.users.create');
+        if(Gate::allows('admin')){
+            return view('web.admin.users.create');
+        }else if(Gate::allows('staff')){
+             return view('web.staff.users.create');
+        }else{
+        abort(403);
+     }
     }
 
     /**
@@ -40,7 +55,13 @@ class UserController extends Controller
     {
         $this->service->saveData($request);
 
-        return redirect('/admin/users')->with('success',"Pengguna $request->name berhasil ditambahkan");
+        if(Gate::allows('admin')){
+        return redirect('/admin/users')->with('success',"Pengguna <strong>$request->name</strong> berhasil ditambahkan");
+    }else if(Gate::allows('staff')){
+        return redirect('/users')->with('success',"Pengguna <strong>$request->name</strong> berhasil ditambahkan");
+              }else{
+                abort(403);
+            }
     }
 
     /**
@@ -56,9 +77,17 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        if(Gate::allows('admin')){
         return view('web.admin.users.edit',[
             'user' => $this->service->getById($user->id)
         ]);
+    }else if(Gate::allows('staff')){
+        return view('web.staff.users.edit',[
+            'user' => $this->service->getById($user->id)
+        ]);
+    }else{
+                abort(403);
+            }
     }
 
     /**
@@ -69,7 +98,13 @@ class UserController extends Controller
         $request->merge(['role' => $user->role]);
         $this->service->updateData($request,$user->id);
 
-        return redirect('/admin/users')->with('success',"Pengguna $request->name berhasil diubah");
+        if(Gate::allows('admin')){
+        return redirect('/admin/users')->with('success',"Pengguna <strong>$request->name</strong> berhasil diubah");
+    }else if(Gate::allows('staff')){
+        return redirect('/users')->with('success',"Pengguna <strong>$request->name</strong> berhasil diubah");
+    }else{
+                abort(403);
+            }
     }
 
     /**
@@ -79,6 +114,12 @@ class UserController extends Controller
     {
         $this->service->deleteById($user->id);
 
-        return redirect('/admin/users')->with('success',"Pengguna $user->email berhasil dihapus");
+        if(Gate::allows('admin')){
+        return redirect('/admin/users')->with('success',"Pengguna <strong>$user->email</strong> berhasil dihapus");
+    }else if(Gate::allows('staff')){
+        return redirect('/users')->with('success',"Pengguna <strong>$user->email</strong> berhasil dihapus");
+    }else{
+                abort(403);
+            }
     }
 }

@@ -1,5 +1,5 @@
 <x-web.layout>
-    <div role="main" class="col-sm">
+    <div role="main" class="col-md">
     <header id="header">
         <div class="row min-vh-100">
         <div class="col-md-6" style="background-image: url('{{asset('assets/images/heroimg.jpg')}}'); " >

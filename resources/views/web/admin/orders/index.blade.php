@@ -33,7 +33,7 @@
                 <th>Tanggal</th>
                 <th>Pelanggan</th>
                 <th>Pembayaran</th>
-                <th>Detail</th>
+                <th>Aksi</th>
                 </tr>
         </thead>
         <tbody>
@@ -41,14 +41,14 @@
                 <tr>
                     <td>{{$orders->firstItem() + $loop->index}}</td>
                     <td>{{$order->created_at}}</td>
-                    <td>{{$order->customer->username}} {{$order->customer->full_name}}</td>
+                    <td>{{$order->username}} {{$order->full_name}}</td>
                     <td>Rp{{number_format($order->payment,'2',',','.')}}</td>
                     <td>
-                        <a href="/admin/orders/{{$order->id}}" class="btn btn-info"><i class="bi-eye"></i></a>
+                        <a href="/admin/orders/{{$order->id}}" class="btn btn-info" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Lihat Detail"><i class="bi-eye"></i></a>
                         <form action="/admin/orders/{{$order->id}}" method="POST" class="d-inline">
                             @method('delete')
                             @csrf
-                            <button class="btn btn-danger" onclick="return confirm('Yakin batalkan pesanan ini?')"><i class="bi-slash-circle"></i></button>
+                            <button class="btn btn-danger" onclick="return confirm('Yakin batalkan pesanan ini?')" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Batalkan Pesanan"><i class="bi-slash-circle"></i></button>
                         </form>
                     </td>
                 </tr>

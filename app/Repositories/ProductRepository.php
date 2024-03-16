@@ -65,6 +65,11 @@ class ProductRepository{
         return $this->model::latest()->filter($request)->paginate(8)->withQueryString();
     }
 
+    public function readAll()
+    {
+        return $this->model::latest()->get();
+    }
+
     public function readById($id)
     {
         return $this->model::find($id);

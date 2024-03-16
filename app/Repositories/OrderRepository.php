@@ -11,13 +11,15 @@ class OrderRepository{
         $this->model = $model;
     }
 
-    public function save($data)
+    public function save($data,$customer)
     {
-       return $this->model::create([
-           'customer_id' => $data['customer_id'],
-           'payment' => $data['payment'],
-           'date' => today()
-       ]);
+        return $this->model::create([
+            'customer_id' => $data['customer_id'],
+            'username' => $customer->username,
+            'full_name' =>  $customer->full_name,
+            'payment' => $data['payment'],
+            'date' => today()
+        ]);
     }
 
     public function update($data)
@@ -29,6 +31,11 @@ class OrderRepository{
     public function read()
     {
         return $this->model::latest()->paginate(10)->withQueryString();
+    }
+
+    public function readAll()
+    {
+        return $this->model::latest()->get();
     }
 
     public function countOrderToday()
@@ -54,6 +61,16 @@ class OrderRepository{
     public function readById($id)
     {
         return $this->model::find($id);
+    }
+
+    public function readByDate($date)
+    {
+        return $this->model::where('date',$date)->get();
+    }
+
+    public function readByIdAndDate($id,$date)
+    {
+        return $this->model::where('id', $id)->where('date', $date)->get();
     }
 
     public function delete($id)

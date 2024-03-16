@@ -1,6 +1,7 @@
 <?php 
 namespace App\Services;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
 use App\Repositories\CustomerRepository;
 
@@ -27,7 +28,7 @@ class CustomerService{
     public function updateData($data, $id)
     {
         $validatedData = $data->validate([
-            'username'=>'required|unique:customers,username',
+            'username'=>['required',Rule::unique('customers')->ignore($id)],
             'full_name'=>'required',
             'phone'=>'required',
             'email'=>'required',

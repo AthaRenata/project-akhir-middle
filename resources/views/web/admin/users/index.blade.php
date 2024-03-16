@@ -85,11 +85,11 @@
                             @endif
                         </td>
                         <td>
-                            <a href="/admin/users/{{$user->id}}/edit" class="btn btn-warning"><i class="bi-pencil"></i></a>
+                            <a href="/admin/users/{{$user->id}}/edit" class="btn btn-warning"  data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Ubah Data"><i class="bi-pencil"></i></a>
                             <form action="/admin/users/{{$user->id}}" method="POST" class="d-inline">
                                 @method('delete')
                                 @csrf
-                                <button class="btn btn-danger" onclick="return confirm('Yakin akan hapus data ini?')"><i class="bi-trash"></i></button>
+                                <button class="btn btn-danger" onclick="return confirm('Yakin akan hapus data ini?')"  data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Hapus Data"><i class="bi-trash"></i></button>
                             </form>
                         </td>
                     </tr>

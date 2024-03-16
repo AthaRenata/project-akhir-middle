@@ -15,8 +15,8 @@
                     <strong class="col">{{$order->created_at}}</strong></h4>
                 <h4 class="col text-theme2 mb-5">
                     <div class="col">Oleh : </div>
-                    <strong class="col">{{$order->customer->full_name}}</strong>
-                <span class="text-body-secondary">({{$order->customer->username}})</span>
+                    <strong class="col">{{$order->full_name}}</strong>
+                <span class="text-body-secondary">({{$order->username}})</span>
                 </h4>
             </div>
         <h4 class="text-theme2 mb-3">Daftar Pesanan</h4>
@@ -25,7 +25,7 @@
             @foreach ($order->products as $product)
                 <li class="list-group-item d-flex justify-content-between">
                     <div class="row row-cols-1 row-cols-lg-2 w-100">
-                        <span class="col">{{$loop->iteration}}. {{$product->name}} <span class="badge rounded-pill text-bg-secondary">{{$product->category->name}}</span></span>
+                        <span class="col">{{$loop->iteration}}. {{$product->pivot->product_name}} <span class="badge rounded-pill text-bg-secondary">{{$product->pivot->category_name}}</span></span>
                         <span class="col text-body-secondary">Rp{{number_format($product->pivot->price,'2',',','.')}}</span>
                     </div>
                     <div>{{$product->pivot->quantity}}</div>

@@ -50,7 +50,7 @@
                             <input type="hidden" class="id">
                             <label class="name form-label"></label>
                             <div class="d-flex gap-1">
-                                <input min="1" type="number" class="quantity form-control @error('quantity') is-invalid @enderror" placeholder="Jumlah Pcs" value="{{old('quantity')}}">
+                                <input type="number" class="quantity form-control @error('quantity') is-invalid @enderror" placeholder="Jumlah Pcs" value="{{old('quantity')}}">
                                 <button type="button" class="btn btn-danger cancel-stock-btn"><i class="bi-dash"></i></button>
                             </div>
                             @error('quantity')

@@ -31,8 +31,19 @@
               </form>
             </div>
           </div>
+
+          @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
     
-        <div class="row row-cols-1 row-cols-md-4 g-4 my-3">
+        <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4 my-3">
           @forelse ($products as $product)
           <div class="col">
             <div class="card h-100 bg-theme1 text-theme3 shadow-md">
@@ -69,7 +80,7 @@
               </div>
             </div>
           @empty
-          <h4 class="text-white fs-4">Belum ada produk</h4>
+          <h4 class="text-body-secondary fs-4">Belum ada produk</h4>
           @endforelse
           </div>
 
@@ -92,7 +103,11 @@
                 <div class="d-flex gap-1">
                 <select name="customer_id" id="customer_id" class="form-select" autofocus required>
                     @foreach ($customers as $customer)
+                    @if(old($customer->id)==$product->customer_id)
+                        <option value="{{$customer->id}}">{{$customer->username}} {{$customer->full_name}}</option selected>
+                    @else
                         <option value="{{$customer->id}}">{{$customer->username}} {{$customer->full_name}}</option>
+                    @endif
                     @endforeach
                 </select>
                 </div>
@@ -126,7 +141,7 @@
                     <label class="name form-label"></label>
                     <div class="d-flex gap-1">
                         <div class="input-group">
-                        <input min="1" type="number" class="quantity form-control @error('quantity') is-invalid @enderror" placeholder="Jumlah Pcs" value="{{old('quantity')}}">
+                        <input min="1" type="number" class="quantity form-control" placeholder="Jumlah Pcs">
                         <span class="input-group-text itemPcs"></span>
                         <span class="input-group-text">Pcs</span>
                         <span class="input-group-text">Rp</span>
@@ -252,9 +267,9 @@
         $template.find('.name').text(productName); 
         $template.find('.itemPrice').text(price); 
         $template.find('.itemPcs').text(stock); 
-        $template.find('.price').val(price); 
-        $template.find('.product_name').val(productName); 
-        $template.find('.category_name').val(category_name); 
+        $template.find('.price').attr('name', 'products['+index+'][price]').val(price); 
+        $template.find('.product_name').attr('name', 'products['+index+'][product_name]').val(productName); 
+        $template.find('.category_name').attr('name', 'products['+index+'][category_name]').val(category_name); 
         $template.find('.id').attr('name', 'products['+index+'][id]').val(productId);
         $template.find('.quantity').attr({
             'name':'products['+index+'][quantity]',

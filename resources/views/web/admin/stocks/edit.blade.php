@@ -45,7 +45,7 @@
                             <input name="products[{{$loop->iteration}}][id]" type="hidden" class="id" value="{{$product->id}}">
                             <label class="name form-label">{{$product->name}}</label>
                             <div class="d-flex gap-1">
-                                <input min="1" type="number" name="products[{{$loop->iteration}}][quantity]" class="quantity form-control @error('quantity') is-invalid @enderror" placeholder="Jumlah Pcs" value="{{old('quantity',$product->pivot->quantity)}}">
+                                <input type="number" name="products[{{$loop->iteration}}][quantity]" class="quantity form-control @error('quantity') is-invalid @enderror" placeholder="Jumlah Pcs" value="{{old('quantity',$product->pivot->quantity)}}">
                             </div>
                             @error('quantity')
                             <div class="invalid-feedback">
