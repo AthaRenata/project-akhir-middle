@@ -26,7 +26,7 @@ class ProductController extends Controller
     public function index()
     {
         return view('web.admin.products.index',[
-            'categories'=> $this->serviceCategory->getAll(),
+            'categories'=> $this->serviceCategory->getAllNoPaginate(),
             'products'=> $this->serviceProduct->getAll(request(['category','search'])),
             'colorArray'=>Colors::getColors()
         ]);
@@ -38,7 +38,7 @@ class ProductController extends Controller
     public function create()
     {
         return view('web.admin.products.create',[
-            'categories'=>$this->serviceCategory->getAll()
+            'categories'=>$this->serviceCategory->getAllNoPaginate()
         ]);
     }
 
@@ -66,7 +66,7 @@ class ProductController extends Controller
     {
         return view('web.admin.products.edit',[
             'product' => $this->serviceProduct->getByName($product->name),
-            'categories'=>$this->serviceCategory->getAll()
+            'categories'=>$this->serviceCategory->getAllNoPaginate()
         ]);
     }
 

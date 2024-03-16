@@ -44,6 +44,11 @@ class CategoryService{
         return $this->repository->update($validatedData);
     }
 
+    public function getAllNoPaginate()
+    {
+        return $this->repository->readAll();
+    }
+
     public function getAll()
     {
         return $this->repository->read();

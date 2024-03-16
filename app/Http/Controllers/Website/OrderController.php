@@ -56,16 +56,16 @@ class OrderController extends Controller
 
         if (Gate::allows('admin')) {
         return view('web.admin.orders.create',[
-            'customers' => $this->serviceCustomer->getAll(),
-            'categories' => $this->serviceCategory->getAll(),
+            'customers' => $this->serviceCustomer->getAllNoPaginate(),
+            'categories' => $this->serviceCategory->getAllNoPaginate(),
             'colorArray'=> Colors::getColors(),
             'products'=> $this->serviceProduct->getAll(request(['category','search'])),
             'orders'=> $this->serviceProduct->getAll($orders,'order')
         ]);
         }else if(Gate::allows('staff')){
             return view('web.staff.orders.create',[
-                'customers' => $this->serviceCustomer->getAll(),
-                'categories' => $this->serviceCategory->getAll(),
+                'customers' => $this->serviceCustomer->getAllNoPaginate(),
+                'categories' => $this->serviceCategory->getAllNoPaginate(),
                 'colorArray'=> Colors::getColors(),
                 'products'=> $this->serviceProduct->getAll(request(['category','search'])),
                 'orders'=> $this->serviceProduct->getAll($orders,'order')

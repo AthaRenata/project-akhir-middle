@@ -22,6 +22,11 @@ class CustomerRepository{
                     ->update($data);
     }
 
+    public function readAll()
+    {
+        return $this->model::latest()->get();
+    }
+
     public function read()
     {
         return $this->model::latest()->paginate(10)->withQueryString();
