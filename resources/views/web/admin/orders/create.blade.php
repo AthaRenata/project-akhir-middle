@@ -338,7 +338,7 @@
     });
 
     $('#btnRefresh').on('click',function(){       
-        $('.stock-item').remove();
+        $('.stock-item').not('#stock-item-template .stock-item').remove();
         $('.form-check-input').prop('checked',false).prop('disabled',false);
         $('#payment').val(0);
         localStorage.clear();
