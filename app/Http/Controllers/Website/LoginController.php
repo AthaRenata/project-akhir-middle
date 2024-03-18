@@ -28,12 +28,12 @@ class LoginController extends Controller
             }else if(Auth::user()->role===2){
                 return redirect()->intended('/home');
             }else{
-                return back()->with('loginError','Invalid User');
+                return back()->with('loginError','Pengguna tidak valid');
             }
 
         }
 
-        return back()->with('loginError','Login Failed');
+        return back()->with('loginError','Login gagal');
     }
 
     public function logout(Request $request){

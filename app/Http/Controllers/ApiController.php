@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class ApiController extends Controller
 {
-    protected function sendSuccess($data = [], $message = "success")
+    protected function sendSuccess($data = [], $message = "Success")
     {
         return response()->json([
             'code' => 200,
@@ -15,7 +15,7 @@ class ApiController extends Controller
         ], 200);
     }
 
-    protected function sendMessage($message = "success")
+    protected function sendMessage($message = "Success")
     {
         return response()->json([
             'code' => 200,

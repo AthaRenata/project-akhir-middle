@@ -18,7 +18,7 @@ class ProductService{
     {
         $validatedData = $data->validate([
             'category_id'=>'nullable',
-            'photo'=>'required',
+            'photo'=>'required|image',
             'name'=>'required|unique:products,name',
             'description'=>'required',
             'price'=>'required'

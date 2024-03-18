@@ -16,7 +16,7 @@ class CategoryService{
     public function saveData($data)
     {
         $validatedData = $data->validate([
-            'icon'=>'required',
+            'icon'=>'required|image',
             'name'=>'required|unique:categories,name'
         ]);
 
