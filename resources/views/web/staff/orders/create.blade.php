@@ -67,7 +67,7 @@
                     <input type="hidden" class="category_name" value="{{ $product->category ? $product->category->name : "Tidak Dikategorikan" }}">
                     @endif
                 </div>
-                <img src="{{asset($product->photo)}}" class="card-img-top" alt="..." height="200">
+                <img src="{{asset($product->photo)}}" class="card-img-top" height="200" alt="photo" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="{{$product->full_description}}">
                 <div class="card-body">
                   <h5 class="card-title">{{$product->name}}</h5>
                   <p class="card-text">{{$product->description}}</p>

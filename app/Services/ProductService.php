@@ -61,6 +61,7 @@ class ProductService{
          $products =  $this->repository->read($request); 
          if (!empty($products)) {
          foreach ($products as $product) {
+            $product->full_description = $product->description; 
             $product->description = Str::words($product->description, 10, '...'); 
          }
         }

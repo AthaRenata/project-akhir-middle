@@ -34,12 +34,12 @@ Route::middleware('auth', 'isAdmin')->prefix('admin')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index']);
     Route::post('/orders/session', [OrderController::class, 'sessionControl']);
 
-    Route::resource('/orders', OrderController::class);
-    Route::resource('/categories', CategoryController::class);
-    Route::resource('/products', ProductController::class);
-    Route::resource('/stocks', StockController::class);
-    Route::resource('/customers', CustomerController::class);
-    Route::resource('/users', UserController::class);
+    Route::resource('/orders', OrderController::class)->except(['update','edit']);
+    Route::resource('/categories', CategoryController::class)->except(['show']);
+    Route::resource('/products', ProductController::class)->except(['show']);
+    Route::resource('/stocks', StockController::class)->except(['show']);
+    Route::resource('/customers', CustomerController::class)->except(['show']);
+    Route::resource('/users', UserController::class)->except(['show']);
 
     Route::get('/reports/transactions', [TransactionController::class, 'index']);
     Route::post('/reports/transactions', [TransactionController::class, 'show']);

@@ -49,7 +49,7 @@
       @forelse ($products as $product)
         <div class="col">
           <div class="card h-100">
-            <img src="{{asset($product->photo)}}" class="card-img-top" alt="...">
+            <img src="{{asset($product->photo)}}" class="card-img-top" alt="photo" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="{{$product->full_description}}">
             <div class="card-body">
               <h5 class="card-title">{{$product->name}}</h5>
               <p class="card-text">{{$product->description}}</p>

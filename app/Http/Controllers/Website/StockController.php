@@ -49,13 +49,6 @@ class StockController extends Controller
         return redirect('/admin/stocks')->with('success',"Stok Tanggal <b>".now()."</b> berhasil ditambahkan");
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Stock $stock)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
