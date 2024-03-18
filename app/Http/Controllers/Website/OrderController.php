@@ -11,6 +11,7 @@ use App\Services\ProductService;
 use App\Services\CategoryService;
 use App\Services\CustomerService;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
 
@@ -126,11 +127,13 @@ class OrderController extends Controller
     {
         if(Gate::allows('admin')){
         return view('web.admin.orders.show',[
-                'order' =>  $this->serviceOrder->getById($order->id)
+                'order' =>  $this->serviceOrder->getById($order->id),
+                'details' => DB::table('order_details')->where('order',$order->id)->get()
         ]);
     }else if(Gate::allows('staff')){
         return view('web.staff.orders.show',[
-            'order' =>  $this->serviceOrder->getById($order->id)
+            'order' =>  $this->serviceOrder->getById($order->id),
+            'details' => DB::table('order_details')->where('order',$order->id)->get()
     ]);
     }else{
         abort(403);

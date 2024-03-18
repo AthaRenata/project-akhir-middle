@@ -22,13 +22,13 @@
         <h4 class="text-theme2 mb-3">Daftar Pesanan</h4>
 
         <ul class="list-group list-group-flush">
-            @foreach ($order->products as $product)
+            @foreach ($details as $detail)
                 <li class="list-group-item d-flex justify-content-between">
                     <div class="row row-cols-1 row-cols-lg-2 w-100">
-                        <span class="col">{{$loop->iteration}}. {{$product->pivot->product_name}} <span class="badge rounded-pill text-bg-secondary">{{$product->pivot->category_name}}</span></span>
-                        <span class="col text-body-secondary">Rp{{number_format($product->pivot->price,'2',',','.')}}</span>
+                        <span class="col">{{$loop->iteration}}. {{$detail->pivot->product_name}} <span class="badge rounded-pill text-bg-secondary">{{$detail->pivot->category_name}}</span></span>
+                        <span class="col text-body-secondary">Rp{{number_format($detail->pivot->price,'2',',','.')}}</span>
                     </div>
-                    <div>{{$product->pivot->quantity}}</div>
+                    <div>{{$detail->pivot->quantity}}</div>
                 </li>
             @endforeach
             <li class="list-group-item list-group-item-danger d-flex justify-content-between">

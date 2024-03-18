@@ -64,7 +64,7 @@
                     </span>
                     <input type="hidden" class="stock" value="{{$product->stock}}">
                     <input type="hidden" class="price" value="{{$product->price}}">
-                    <input type="hidden" class="category_name" value="{{$product->category->name}}">
+                    <input type="hidden" class="category_name" value="{{ $product->category ? $product->category->name : "Tidak Dikategorikan" }}">
                     @endif
                 </div>
                 <img src="{{asset($product->photo)}}" class="card-img-top" alt="..." height="200">
